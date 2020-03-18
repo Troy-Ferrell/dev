@@ -1,0 +1,146 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+
+  <script src="js/libs/modernizr-2.5.3.min.js"></script>
+</head>
+<body>
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <header></header>
+  <div role="main">
+    <div id="startmenu" class="menu">
+        <button id="play">Play</button>
+        <p>
+          Movement: ARROWS<br>
+          Pause: ESC
+          <br/>
+          Note: Work in progress
+        </p>
+    </div>
+    <div id="loadingMenu" class="menu" hidden="">
+      <div  class="progress" >
+        <div id="loadingProgressBar"  class="progress-bar progress-bar-tron" role="progressbar"
+          aria-valuemin="0" aria-valuemax="100" style="width:0%">
+          
+        </div>
+        <span style="position: absolute;display: block;width: 100%;color: black;">
+        Loading Game...
+        </span>
+      </div>
+    </div>
+    <div id="ingamemenu" class="menu" style="display:none;">
+        <button id="resume">Resume</button>
+        <p>
+          Movement: ARROWS<br>
+          Pause: ESC
+        </p>
+    </div>
+     <div id="gameovermenu" class="menu" style="display:none;">
+        <button id="newgame">New Game</button>
+        <button id="mainmenu">Main Menu</button>
+    </div>
+
+    <div id="scorediv" hidden>
+        Score: <span id="score">0</span>
+    </div>
+
+    <div id="controlDiv" hidden>
+      <button id="toggleSound">
+        Sound
+        <i id="toggleSoundIcon" class="fa fa-volume-up" aria-hidden="true"></i> 
+      </button>
+    </div>
+
+    <div id="errordiv">
+    </div>
+  </div>
+  <footer></footer>
+  
+  <script src="js/libs/jquery-1.12.3.min.js"></script>
+
+  <script src="js/libs/three.min.js"></script>
+  <script src="js/libs/three.extras.rendermanager.js"></script>
+
+  <script src="js/libs/collada/Animation.js"></script>
+  <script src="js/libs/collada/AnimationHandler.js"></script>
+  <script src="js/libs/collada/KeyFrameAnimation.js"></script>
+  <script src="js/libs/ColladaLoader.js"></script>
+
+  <script src="js/libs/stats.min.js"></script>
+  <script src="js/libs/underscore.min.js"></script>
+  <script src="js/postprocessing/EffectComposer.js"></script>
+  <script src="js/postprocessing/RenderPass.js"></script>
+  <script src="js/postprocessing/ShaderPass.js"></script>
+  <script src="js/postprocessing/ShaderExtras.js"></script>
+  <script src="js/postprocessing/BloomPass.js"></script>
+  <script src="js/postprocessing/MaskPass.js"></script>
+  <script src="js/postprocessing/SavePass.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/Detector.js"></script>
+  <script src="js/script.js?v=5"></script>
+  <script src="js/SoundManager.js"></script>
+  <script src="js/Sound.js"></script>
+  
+  <script src="js/Game/LightRing.js"></script>
+  <script src="js/Game/Obstacles.js"></script>
+  <script src="js/Game/Tunnel.js"></script>
+  <script src="js/Game/Player.js"></script>
+  <script src="js/Game/ItemManager.js"></script>
+  <script src="js/Game/ParticleEngine.js"></script>
+  <script src="js/Game/CollisionManager.js"></script>
+  <script src="js/Game/Trail.js"></script>
+  <script src="js/Game/SkyBox.js"></script>
+  <script src="js/Game/Derezz.js"></script>
+  <script src="js/Game/Game.js"></script>
+  
+  <script src="js/Intro/Intro.js"></script>
+  <script src="js/Intro/Pen.js"></script>
+<!--
+	<script type="x-shader/x-vertex" id="vertexshader">
+		attribute float size;
+		attribute vec3 ca;
+		varying vec3 vColor;
+
+		void main(){
+			vColor = ca;
+			vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+			gl_PointSize = size;
+			gl_Position = projectionMatrix * mvPosition;
+		}
+	</script>
+	<script type="x-shader/x-fragment" id="fragmentshader">
+		uniform vec3 color;
+		uniform sampler2D texture;
+
+		varying vec3 vColor;
+		void main(){
+			//gl_FragColor = vec4(color, 1.0);
+			gl_FragColor = vec4(color*vColor, 1.0);
+			gl_FragColor = gl_FragColor * texture2D(texture, gl_PointCoord);
+		}
+	</script>
+-
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+  -->
+</body>
+</html>
